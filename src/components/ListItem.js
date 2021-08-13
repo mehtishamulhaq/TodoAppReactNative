@@ -5,8 +5,10 @@ import {
     View,
   } from 'react-native';
 import { HStack, Checkbox,SmallCloseIcon } from "native-base"
+import { useNavigation } from '@react-navigation/native';
 
-export default function ListItem({item, handleStatusChange, handleDelteItem}) {
+export default function ListItem({item, handleStatusChange, handleDelteItem, ...otherProps}) {
+    const navigation = useNavigation();
     
     return (
         <View style  ={styles.listIemContainer}>
@@ -23,7 +25,12 @@ export default function ListItem({item, handleStatusChange, handleDelteItem}) {
                     />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style = {styles.title}>{item.Title}</Text> 
+                    <Text 
+                        style = {styles.title}
+                        onPress = { () => navigation.navigate('Details' , {item: item})}
+                    >
+                        {item.Title}
+                    </Text> 
                 </View>
                 <SmallCloseIcon color = 'lightgrey' onPress = {() => handleDelteItem(item.Id)}/>
             </HStack>
