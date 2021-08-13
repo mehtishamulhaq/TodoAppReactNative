@@ -4,18 +4,17 @@ import ListItem from './ListItem';
 
 export default function TodoList({data, updateList}) {
 
-
-  const handleStatusChange = (id) => {
-    const updatedList = data.map(item => {
-      if(item.Id === id)
-        return {...item, Completed: !item.Completed}
-      return item
-    })
+  const handleDelteItem = (id)=>{
+    const updatedList = data.filter(item => item.Id !== id);
     updateList(updatedList);
   }
 
-  const handleDelteItem = (id)=>{
-    const updatedList = data.filter(item => item.Id !== id);
+  const handleUpdateItem = (updatedItem) =>{
+    const updatedList = data.map(item => {
+      if(item.Id === updatedItem.Id)
+        return updatedItem;
+      return item
+    })
     updateList(updatedList);
   }
 
@@ -25,8 +24,8 @@ export default function TodoList({data, updateList}) {
           renderItem = {({item})=> 
             <ListItem 
               item = {item}  
-              handleStatusChange = {handleStatusChange} 
               handleDelteItem = {handleDelteItem}
+              handleUpdateItem = {handleUpdateItem}
             />}
           keyExractor = {item  => item.Id}/>
   )

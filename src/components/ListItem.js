@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import {
     StyleSheet,
     Text,
+    TextInput,
     View,
   } from 'react-native';
-import { HStack, Checkbox,SmallCloseIcon } from "native-base"
+import { HStack, Checkbox } from "native-base"
 import { useNavigation } from '@react-navigation/native';
-
-export default function ListItem({item, handleStatusChange, handleDelteItem}) {
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
     const navigation = useNavigation();
-    
+    const [editMode, setEditMode]= useState(false);
+    const [text, setText]= useState(item.Title);
+
+    const inputRef = useRef();
+
+    const handleEditText = () =>{
+        setEditMode(true); 
+        console.log(inputRef);
+        if(inputRef && inputRef.current) 
+            inputRef.current.focus();
+    }
+
     return (
         <View style  ={styles.listIemContainer}>
             <HStack alignItems="center" >
                 <View style={styles.checkboxContainer}>
                     <Checkbox
                     isChecked={item.Completed}
-                    onChange={() => handleStatusChange(item.Id)}
+                    onChange={() => handleUpdateItem({...item , Completed: !item.Completed})}
                     value={item.title}
                     accessibilityLabel = {item.Title}
                     defaultIsChecked = {item.Completed}
@@ -24,14 +37,27 @@ export default function ListItem({item, handleStatusChange, handleDelteItem}) {
                     />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text 
+                    {editMode ? 
+                    (<TextInput 
                         style = {styles.title}
-                        onPress = { () => navigation.navigate('Details' , {item: item})}
-                    >
-                        {item.Title}
+                        onChangeText={(text) => setText(text)}
+                        onSubmitEditing = {() => handleUpdateItem({...item , Title: text})}
+                        ref = {inputRef}
+                        defaultValue={item.Title}
+                    />  
+                    ): 
+                    (<Text 
+                        style = {styles.title}
+                        onPress = { () => navigation.navigate('Details' , {item: item})}>
+                            {item.Title}
                     </Text> 
+                    )}
+                    
                 </View>
-                <SmallCloseIcon color = 'lightgrey' onPress = {() => handleDelteItem(item.Id)}/>
+                <EntypoIcon name="edit" size={20} color="lightgrey" onPress = {handleEditText}/>
+                {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
+                <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/>
+                {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/> */}
             </HStack>
         </View>
     )

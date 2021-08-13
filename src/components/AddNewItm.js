@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 5,
         marginRight: 10,
-        borderRightColor: 'grey',
+        borderColor: 'grey',
         borderWidth: 2,
     },
     addButton: {
