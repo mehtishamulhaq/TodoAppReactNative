@@ -5,18 +5,23 @@ import {
     StatusBar,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
   } from 'react-native';
-import { flex, justifyContent } from 'styled-system';
 
 export default function DetailScreen(props) {
     const { route } = props;
     const {item} = route.params
-    console.log(item)
+    const backgroundColor = item.Completed ? 'lightgreen': 'pink'; 
+    const stausToDisplay = item.Completed === true ? 'Completed' : 'Pending'
     return (
         <View style = {styles.mainContainer}>
-           <Text style = {styles.title}>{item.Title}</Text> 
-           
+            <View style = {styles.titleContainer} >
+                <Text style = {styles.title}>{item.Title}</Text> 
+            </View>
+            <View style = {{...styles.statusContainer, backgroundColor}}>
+                <Text style = {styles.title}>{stausToDisplay}</Text>
+            </View>
         </View>
     )
 }
@@ -27,7 +32,19 @@ const styles = StyleSheet.create({
       flex: 1,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: 'white'
+    },
+    status:{
+        
+    },
+    statusContainer:{
+        width: '100%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    titleContainer: {
+        flex: 1
     },
     title: {
         padding: 10,
