@@ -6,15 +6,8 @@
  * @flow strict-local
  */
  import 'react-native-gesture-handler';
-import React , {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React  from 'react';
+
 
 
 import {  NativeBaseProvider } from "native-base"
@@ -26,14 +19,6 @@ import DetailScreen from './src/components/routes/DetailScreen'
 
 const App = () =>{
 
-  const screens = {
-    Home: {
-      screen: HomeScreen,
-    },
-    Details: {
-      screen: DetailScreen,
-    }
-  }
   const Stack = createStackNavigator();
   return (
     <NativeBaseProvider>
@@ -45,7 +30,11 @@ const App = () =>{
             component={HomeScreen}
             options={{ title: 'Todo App' }}
           />
-          <Stack.Screen name="Details" component={DetailScreen} />
+          <Stack.Screen 
+            name="Details" 
+            component={DetailScreen} 
+            options={{ title: 'Task Details' }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
@@ -53,8 +42,5 @@ const App = () =>{
   );
 }
 
-const styles = StyleSheet.create({
-  
-});
 
 export default App;

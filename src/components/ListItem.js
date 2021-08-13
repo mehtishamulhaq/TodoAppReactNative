@@ -7,13 +7,12 @@ import {
 import { HStack, Checkbox,SmallCloseIcon } from "native-base"
 import { useNavigation } from '@react-navigation/native';
 
-export default function ListItem({item, handleStatusChange, handleDelteItem, ...otherProps}) {
+export default function ListItem({item, handleStatusChange, handleDelteItem}) {
     const navigation = useNavigation();
     
     return (
         <View style  ={styles.listIemContainer}>
             <HStack alignItems="center" >
-            {/* <Text >id = {item.Id}</Text>  */}
                 <View style={styles.checkboxContainer}>
                     <Checkbox
                     isChecked={item.Completed}

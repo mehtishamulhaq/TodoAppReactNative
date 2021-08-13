@@ -1,6 +1,5 @@
 import React , {useState} from 'react';
-import {View , TextInput, Text, Button, StyleSheet, TouchableWithoutFeedback, TouchableOpacity} from 'react-native'
-import { borderColor } from 'styled-system';
+import {View , TextInput, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native'
 
 export default function AddNewItm({handleAddNewItem}) {
     const [text, setText] = useState('');

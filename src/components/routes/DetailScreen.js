@@ -1,11 +1,7 @@
 import React from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
     StyleSheet,
     Text,
-    TouchableOpacity,
     View,
   } from 'react-native';
 
@@ -32,7 +28,6 @@ const styles = StyleSheet.create({
       flex: 1,
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: 'white'
     },
     status:{
         
