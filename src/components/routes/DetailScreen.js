@@ -15,7 +15,7 @@ export default function DetailScreen(props) {
     console.log(item)
     return (
         <View style = {styles.mainContainer}>
-           <Text>{item.Title}</Text> 
+           <Text style = {styles.title}>{item.Title}</Text> 
            
         </View>
     )
@@ -29,5 +29,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    
+    title: {
+        padding: 10,
+        textAlign: 'center',
+        fontSize: 20
+    }
   });
