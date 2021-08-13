@@ -41,7 +41,7 @@ export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
                     (<TextInput 
                         style = {styles.title}
                         onChangeText={(text) => setText(text)}
-                        onSubmitEditing = {() => handleUpdateItem({...item , Title: text})}
+                        onSubmitEditing = {() => {setEditMode(false); handleUpdateItem({...item , Title: text})}}
                         ref = {inputRef}
                         defaultValue={item.Title}
                     />  
@@ -55,8 +55,8 @@ export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
                     
                 </View>
                 <EntypoIcon name="edit" size={20} color="lightgrey" onPress = {handleEditText}/>
-                {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
                 <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/>
+                {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
                 {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/> */}
             </HStack>
         </View>
