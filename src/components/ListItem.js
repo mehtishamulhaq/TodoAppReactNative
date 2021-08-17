@@ -9,7 +9,8 @@ import { HStack, Checkbox } from "native-base"
 import { useNavigation } from '@react-navigation/native';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
+
+export default function ListItem({item, deleteTodo, updateTodo}) {
     const navigation = useNavigation();
     const [editMode, setEditMode]= useState(false);
     const [text, setText]= useState(item.Title);
@@ -29,7 +30,7 @@ export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
                 <View style={styles.checkboxContainer}>
                     <Checkbox
                     isChecked={item.Completed}
-                    onChange={() => handleUpdateItem({...item , Completed: !item.Completed})}
+                    onChange={() => updateTodo({...item , Completed: !item.Completed})}
                     value={item.title}
                     accessibilityLabel = {item.Title}
                     defaultIsChecked = {item.Completed}
@@ -41,7 +42,7 @@ export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
                     (<TextInput 
                         style = {styles.title}
                         onChangeText={(text) => setText(text)}
-                        onSubmitEditing = {() => {setEditMode(false); handleUpdateItem({...item , Title: text})}}
+                        onSubmitEditing = {() => {setEditMode(false); updateTodo({...item , Title: text})}}
                         ref = {inputRef}
                         defaultValue={item.Title}
                     />  
@@ -55,7 +56,7 @@ export default function ListItem({item, handleDelteItem, handleUpdateItem}) {
                     
                 </View>
                 <EntypoIcon name="edit" size={20} color="lightgrey" onPress = {handleEditText}/>
-                <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/>
+                <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => deleteTodo(item.Id)}/>
                 {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
                 {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/> */}
             </HStack>

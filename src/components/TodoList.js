@@ -2,21 +2,9 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import ListItem from './ListItem';
 
-export default function TodoList({data, updateList}) {
+export default function TodoList({data, deleteTodo, updateTodo}) {
 
-  const handleDelteItem = (id)=>{
-    const updatedList = data.filter(item => item.Id !== id);
-    updateList(updatedList);
-  }
-
-  const handleUpdateItem = (updatedItem) =>{
-    const updatedList = data.map(item => {
-      if(item.Id === updatedItem.Id)
-        return updatedItem;
-      return item
-    })
-    updateList(updatedList);
-  }
+  
 
   return (
         <FlatList 
@@ -24,8 +12,8 @@ export default function TodoList({data, updateList}) {
           renderItem = {({item})=> 
             <ListItem 
               item = {item}  
-              handleDelteItem = {handleDelteItem}
-              handleUpdateItem = {handleUpdateItem}
+              deleteTodo = {deleteTodo}
+              updateTodo = {updateTodo}
             />}
           keyExractor = {item  => item.Id}/>
   )

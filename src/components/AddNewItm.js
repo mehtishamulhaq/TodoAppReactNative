@@ -1,13 +1,11 @@
 import React , {useState} from 'react';
 import {View , TextInput, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native'
 
-export default function AddNewItm({handleAddNewItem}) {
+export default function AddNewItm({addTodo}) {
     const [text, setText] = useState('');
     const addNewItem = () => {
-        debugger;
-        console.log(text , text.length)
         if(text.length > 0){
-            handleAddNewItem(text);
+            addTodo(text);
             setText('');
         }
     }

@@ -6,13 +6,18 @@ import {
 } from 'react-native';
 
 import AddNewItm from '../AddNewItm'
-import data from '../../constants/data';
 import TodoList from '../TodoList';
+import { connect } from 'react-redux';
+import todoActions from './../../redux/actions/todoAction';
+import { bindActionCreators } from 'redux';
 
-const HomeScreen = () =>{
 
-  const partialData = data.filter((item , index) => index <= 10)
-  const [list , setList] = useState(partialData);
+const HomeScreen = (props) =>{
+
+  // const partialData = data.filter((item , index) => index <= 10)
+  // const [list , setList] = useState(partialData);
+
+  const {todo: list } = props;
   
   const getId = () =>{
     let maxId = 0;
@@ -46,12 +51,15 @@ const HomeScreen = () =>{
   return (
     <View flex={1}>
       <View style={{ height: 150,  }} >
-        <AddNewItm handleAddNewItem = {handleNewItem}/>
+        <AddNewItm addTodo = {props.addTodo}/>
       </View>
       <View style={{ flex: 6,  }} >
         <TodoList 
           data= {list}
           updateList = {updateList}
+          deleteTodo = {props.deleteTodo}
+          updateTodo = {props.updateTodo}
+
        />
       </View>
     </View>
@@ -82,4 +90,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+const mapStateToProps = (state) =>{
+  return {
+    todo: state.todo
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    addTodo : bindActionCreators(todoActions.addTodo, dispatch),
+    deleteTodo : bindActionCreators(todoActions.deleteTodo, dispatch),
+    updateTodo : bindActionCreators(todoActions.updateTodo, dispatch),
+  }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
