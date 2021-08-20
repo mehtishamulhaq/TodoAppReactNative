@@ -15,7 +15,7 @@ export default function TodoList({data, deleteTodo, updateTodo}) {
               deleteTodo = {deleteTodo}
               updateTodo = {updateTodo}
             />}
-          keyExractor = {item  => item.Id}/>
+            keyExtractor={(item, index) => index.toString()}/>
   )
 }
 

@@ -13,17 +13,18 @@ import React  from 'react';
 import {  NativeBaseProvider } from "native-base"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import HomeScreen from './src/components/routes/HomeScreen';
 import DetailScreen from './src/components/routes/DetailScreen';
 import configureStore from './src/redux/store/store';
-import data from './src/constants/data';
-import { Provider as ReduxProvider } from 'react-redux';
+import initialState from './src/redux/initialState'
 
 const App = () =>{
 
   const Stack = createStackNavigator();
-  const store = configureStore({todo: data})
+  const store = configureStore(initialState)
+  console.log('state in right after creations: ', store.getState());
   return (
     <ReduxProvider store = {store}>
       <NativeBaseProvider>

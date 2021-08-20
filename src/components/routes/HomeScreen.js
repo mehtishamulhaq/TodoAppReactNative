@@ -1,5 +1,5 @@
 
-import React , {useState} from 'react';
+import React , {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,43 +10,12 @@ import TodoList from '../TodoList';
 import { connect } from 'react-redux';
 import todoActions from './../../redux/actions/todoAction';
 import { bindActionCreators } from 'redux';
+import {Center, Spinner} from 'native-base';
 
 
 const HomeScreen = (props) =>{
-
-  // const partialData = data.filter((item , index) => index <= 10)
-  // const [list , setList] = useState(partialData);
-
-  const {todo: list } = props;
   
-  const getId = () =>{
-    let maxId = 0;
-   list.forEach(item => {
-     if(item.Id > maxId)
-      maxId = item.Id;
-  });
-  return maxId + 1;
-}
-
-  const getNewItem = (title) =>{
-    const id = getId();
-    let newItem = {
-      UserId: 11,
-      Id: id,
-      Title: title,
-      Completed : false,
-     }
-     return newItem;
-  }
-
-  const handleNewItem = (title) => {
-    const newItem =  getNewItem(title);
-    setList([newItem, ...list])
-  }
-
-  const updateList = (updatedList) =>{
-    setList(updatedList);
-  }
+  const {todoList } = props;
   
   return (
     <View flex={1}>
@@ -55,8 +24,7 @@ const HomeScreen = (props) =>{
       </View>
       <View style={{ flex: 6,  }} >
         <TodoList 
-          data= {list}
-          updateList = {updateList}
+          data= {todoList}
           deleteTodo = {props.deleteTodo}
           updateTodo = {props.updateTodo}
 
@@ -88,11 +56,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  spinnerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 const mapStateToProps = (state) =>{
+  console.log('state in HomeScreen: ', state);
   return {
-    todo: state.todo
+    todoList: state.todoList
   }
 }
 

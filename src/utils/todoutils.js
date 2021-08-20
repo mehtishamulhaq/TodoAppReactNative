@@ -3,12 +3,12 @@
 
 export const addTodo = (list, title) =>{
     const newItem =  getNewItem(list, title);
-    return {todo: [newItem, ...list]}
+    return {todoList: [newItem, ...list]}
 }
 
 export const delteTodo = (list, id)=>{
     const updatedList = list.filter(item => item.Id !== id);
-    return {todo: [...updatedList]}
+    return {todoList: [...updatedList]}
   }
 
 export const updateTodo = (list, updatedItem) =>{
@@ -17,7 +17,7 @@ export const updateTodo = (list, updatedItem) =>{
       return updatedItem;
     return item
   })
-  return {todo: [...updatedList]}
+  return {todoList: [...updatedList]}
 }
 
 /////////////////////////////////////////////
