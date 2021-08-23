@@ -32,7 +32,8 @@ export default function ListItem({item, deleteTodo, updateTodo}) {
                     isChecked={item.completed}
                     onChange={() => updateTodo({...item , Completed: !item.completed})}
                     value={item.title}
-                    accessibilityLabel = {item.Title}
+                    accessible={true}
+                    accessibilityLabel={`${item.Title}`}
                     defaultIsChecked = {item.completed}
                     colorScheme = 'cyan'
                     />
