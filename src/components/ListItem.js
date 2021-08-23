@@ -29,11 +29,11 @@ export default function ListItem({item, deleteTodo, updateTodo}) {
             <HStack alignItems="center" >
                 <View style={styles.checkboxContainer}>
                     <Checkbox
-                    isChecked={item.Completed}
-                    onChange={() => updateTodo({...item , Completed: !item.Completed})}
+                    isChecked={item.completed}
+                    onChange={() => updateTodo({...item , Completed: !item.completed})}
                     value={item.title}
                     accessibilityLabel = {item.Title}
-                    defaultIsChecked = {item.Completed}
+                    defaultIsChecked = {item.completed}
                     colorScheme = 'cyan'
                     />
                 </View>
@@ -50,15 +50,15 @@ export default function ListItem({item, deleteTodo, updateTodo}) {
                     (<Text 
                         style = {styles.title}
                         onPress = { () => navigation.navigate('Details' , {item: item})}>
-                            {item.Title}
+                            {item.title}
                     </Text> 
                     )}
                     
                 </View>
                 <EntypoIcon name="edit" size={20} color="lightgrey" onPress = {handleEditText}/>
-                <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => deleteTodo(item.Id)}/>
+                <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => deleteTodo(item.id)}/>
                 {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
-                {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.Id)}/> */}
+                {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.id)}/> */}
             </HStack>
         </View>
     )

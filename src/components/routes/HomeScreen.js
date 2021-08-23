@@ -16,6 +16,12 @@ import {Center, Spinner} from 'native-base';
 const HomeScreen = (props) =>{
   
   const {todoList } = props;
+
+  useEffect(() =>{
+    if(todoList.length <= 0){
+      props.loadData();
+    }
+  })
   
   return (
     <View flex={1}>
@@ -23,40 +29,25 @@ const HomeScreen = (props) =>{
         <AddNewItm addTodo = {props.addTodo}/>
       </View>
       <View style={{ flex: 6,  }} >
-        <TodoList 
+        {
+          todoList.length <= 0  ? (
+            <View style = {styles.spinnerContainer}>
+              <Spinner/>
+            </View>
+          ) : 
+        (<TodoList 
           data= {todoList}
           deleteTodo = {props.deleteTodo}
           updateTodo = {props.updateTodo}
-
-       />
+       />)
+        }
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  spinnerContainer: {
+   spinnerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -75,6 +66,7 @@ const mapDispatchToProps = (dispatch) =>{
     addTodo : bindActionCreators(todoActions.addTodo, dispatch),
     deleteTodo : bindActionCreators(todoActions.deleteTodo, dispatch),
     updateTodo : bindActionCreators(todoActions.updateTodo, dispatch),
+    loadData: bindActionCreators(todoActions.loadData, dispatch)
   }
 }
 
