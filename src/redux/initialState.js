@@ -1,7 +1,6 @@
 // import data from "../constants/data";
 const initialState =  {
-    todoList: [],
-    isLoading: true,
+    todoList: []
 }
 
 export default initialState;

@@ -8,12 +8,12 @@ import {
 export default function DetailScreen(props) {
     const { route } = props;
     const {item} = route.params
-    const backgroundColor = item.Completed ? 'lightgreen': 'pink'; 
-    const stausToDisplay = item.Completed === true ? 'Completed' : 'Pending'
+    const backgroundColor = item.completed ? 'lightgreen': 'pink'; 
+    const stausToDisplay = item.completed === true ? 'Completed' : 'Pending'
     return (
         <View style = {styles.mainContainer}>
             <View style = {styles.titleContainer} >
-                <Text style = {styles.title}>{item.Title}</Text> 
+                <Text style = {styles.title}>{item.title}</Text> 
             </View>
             <View style = {{...styles.statusContainer, backgroundColor}}>
                 <Text style = {styles.title}>{stausToDisplay}</Text>

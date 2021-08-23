@@ -16,6 +16,9 @@ export default todoReducer = (state = initialState.todoList, action) => {
         case actionTypes.UPDATE_TODO:
             updatedState = todoUtils.updateTodo(state.todoList, action.payload)
             return updatedState
+        case actionTypes.LOAD_TODO_DATA:
+            updatedState = {todoList: action.payload};
+            return updatedState;
         default:
             return state;
     }

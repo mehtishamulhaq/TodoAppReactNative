@@ -1,4 +1,5 @@
 import actionTypes from '../actionTypes/todoActionTypes';
+import axios from "axios";
 
 const actions = {
     addTodo :(payload ) =>{
@@ -9,6 +10,16 @@ const actions = {
     },
     updateTodo :(payload ) =>{
         return {type: actionTypes.UPDATE_TODO, payload}
+    },
+    loadData : () => {
+        return (dispatch) => {
+            const response = axios.get('https://jsonplaceholder.typicode.com/todos')
+            .then(response => {
+            console.log('data received !',response.data);
+            dispatch({type: actionTypes.LOAD_TODO_DATA, payload: response.data})
+            })
+            
+        }
     }
 }
 
