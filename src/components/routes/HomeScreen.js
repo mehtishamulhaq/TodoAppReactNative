@@ -10,7 +10,7 @@ import TodoList from '../TodoList';
 import { connect } from 'react-redux';
 import todoActions from './../../redux/actions/todoAction';
 import { bindActionCreators } from 'redux';
-import {Center, Spinner} from 'native-base';
+import {Spinner} from 'native-base';
 
 
 const HomeScreen = (props) =>{

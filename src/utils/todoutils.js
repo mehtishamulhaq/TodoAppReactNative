@@ -7,13 +7,13 @@ export const addTodo = (list, title) =>{
 }
 
 export const delteTodo = (list, id)=>{
-    const updatedList = list.filter(item => item.Id !== id);
+    const updatedList = list.filter(item => item.id!== id);
     return {todoList: [...updatedList]}
   }
 
 export const updateTodo = (list, updatedItem) =>{
   const updatedList = list.map(item => {
-    if(item.Id === updatedItem.Id)
+    if(item.id=== updatedItem.id)
       return updatedItem;
     return item
   })
@@ -24,8 +24,8 @@ export const updateTodo = (list, updatedItem) =>{
 const getId = (list) =>{
     let maxId = 0;
    list.forEach(item => {
-     if(item.Id > maxId)
-      maxId = item.Id;
+     if(item.id > maxId)
+      maxId = item.id;
   });
   return maxId + 1;
 }
@@ -33,10 +33,10 @@ const getId = (list) =>{
 const getNewItem = (list ,title) =>{
   const id = getId(list);
   let newItem = {
-    UserId: 11,
-    Id: id,
-    Title: title,
-    Completed : false,
+    userId: 11,
+    id: id,
+    title: title,
+    completed : false,
    }
    return newItem;
 }

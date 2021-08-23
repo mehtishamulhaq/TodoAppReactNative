@@ -5,58 +5,36 @@ import {
     TextInput,
     View,
   } from 'react-native';
-import { HStack, Checkbox } from "native-base"
+import { HStack, Checkbox } from "native-base";
 import { useNavigation } from '@react-navigation/native';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function ListItem({item, deleteTodo, updateTodo}) {
     const navigation = useNavigation();
-    const [editMode, setEditMode]= useState(false);
-    const [text, setText]= useState(item.Title);
-
-    const inputRef = useRef();
-
-    const handleEditText = () =>{
-        setEditMode(true); 
-        console.log(inputRef);
-        if(inputRef && inputRef.current) 
-            inputRef.current.focus();
-    }
 
     return (
         <View style  ={styles.listIemContainer}>
             <HStack alignItems="center" >
                 <View style={styles.checkboxContainer}>
                     <Checkbox
-                    isChecked={item.completed}
-                    onChange={() => updateTodo({...item , Completed: !item.completed})}
-                    value={item.title}
-                    accessible={true}
-                    accessibilityLabel={`${item.Title}`}
-                    defaultIsChecked = {item.completed}
-                    colorScheme = 'cyan'
+                        isChecked={item.completed}
+                        onChange={() => updateTodo({...item , completed: !item.completed})}
+                        value={item.title}
+                        accessible={true}
+                        accessibilityLabel={`${item.title}`}
+                        defaultIsChecked = {item.completed}
+                        colorScheme = 'cyan'
                     />
                 </View>
-                <View style={styles.textContainer}>
-                    {editMode ? 
-                    (<TextInput 
+                <View style={styles.textContainer}>   
+                    <Text 
                         style = {styles.title}
-                        onChangeText={(text) => setText(text)}
-                        onSubmitEditing = {() => {setEditMode(false); updateTodo({...item , Title: text})}}
-                        ref = {inputRef}
-                        defaultValue={item.Title}
-                    />  
-                    ): 
-                    (<Text 
-                        style = {styles.title}
-                        onPress = { () => navigation.navigate('Details' , {item: item})}>
+                        onPress = { () => navigation.navigate('Details' , {id: item.id})}>
                             {item.title}
                     </Text> 
-                    )}
-                    
                 </View>
-                <EntypoIcon name="edit" size={20} color="lightgrey" onPress = {handleEditText}/>
+                <EntypoIcon name="edit" size={20} color="lightgrey" onPress = { () => navigation.navigate('Details' , {id: item.id, editMode: true})}/>
                 <MaterialIcons name="delete" size={30} color="lightgrey" onPress = {() => deleteTodo(item.id)}/>
                 {/* <EntypoIcon name="cross" size={30} color="lightgrey" /> */}
                 {/* <MaterialIcons name="delete-outline" size={30} color="lightgrey" onPress = {() => handleDelteItem(item.id)}/> */}
